@@ -12,6 +12,22 @@ function init() {
   let voices = [];
   voices = synth.getVoices();
 
+  synth.addEventListener("voiceschanged", () => {
+    voices = synth.getVoices();
+    for (const element of voices) {
+      const option = document.createElement("option");
+      option.textContent = `${element.name} (${element.lang})`;
+
+      if (element.default) {
+        option.textContent += " — DEFAULT";
+      }
+
+      option.setAttribute("data-lang", element.lang);
+      option.setAttribute("data-name", element.name);
+      document.getElementById("voice-select").appendChild(option);
+    }
+  });
+
   function populateVoiceList() {
     for (const element of voices) {
       const option = document.createElement("option");
