@@ -41,11 +41,11 @@ function init() {
     }
 
     synth.speak(utterThis);
-    while (synth.speaking) {
-      smileImg.src="assets/images/smiling-open.png";
+    smileImg.src="assets/images/smiling-open.png";
+    
+    utterThis.onend = () => {
+      smileImg.src="assets/images/smiling.png";
     }
-
-    smileImg.src="assets/images/smiling.png";
   });
 
   populateVoiceList();
